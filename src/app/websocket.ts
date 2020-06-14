@@ -2,6 +2,9 @@ import { OrderService } from './services/order.service';
 import { AppComponent } from "./app.component";
 import * as Stomp from "stompjs";
 import * as SockJS from "sockjs-client";
+import { Order } from './models/order';
+
+const STORAGE_KEY = "Orders";
 
 export class WebSocketAPI {
   webSocketEndPoint: string = "http://localhost:8080/mediaan-ws";
@@ -14,6 +17,10 @@ export class WebSocketAPI {
   }
 
   _connect() {
+    if(localStorage.getItem(STORAGE_KEY) === null)
+    {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify([]));
+    }
     console.log("trying to connect websocket");
     let ws = new SockJS(this.webSocketEndPoint);
     this.stompClient = Stomp.over(ws);
@@ -45,7 +52,6 @@ export class WebSocketAPI {
   onOrderReceived(order) {
     console.log("Order received from server: " + order);
     this.orderService.something(order.body);
-
-    // this.appComponent.handleOrder(JSON.stringify(order.body));
+    this.appComponent.handleOrder(JSON.stringify(order.body));
   }
 }

@@ -1,6 +1,5 @@
 import { OrderService } from './services/order.service';
 import { Component, OnInit } from "@angular/core";
-import { HttpClient } from "@angular/common/http";
 import { WebSocketAPI } from './websocket';
 import { Order } from './models/order';
 
