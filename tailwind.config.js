@@ -1,7 +1,12 @@
 module.exports = {
   purge: [],
   theme: {
-    extend: {},
+    extend: {
+
+      colors:{
+        'grey': '#C4C4C4'
+      }
+    },
   },
   variants: {},
   plugins: [],

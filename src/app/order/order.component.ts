@@ -11,16 +11,22 @@ import { OrderService } from "../services/order.service";
 export class OrderComponent implements OnInit {
   orders: Order[];
   localOrders: Order[];
+  ready: boolean = false;
   constructor(private orderService: OrderService) {
     this.orders = [];
   }
 
-  ngOnInit() {    
+  ngOnInit() {
     this.orderService.somethingMessage$.subscribe((data: any) => this.updateOrders(data));
     this.localOrders = JSON.parse(localStorage.getItem("Orders") || "[]");
+    for (var order of this.localOrders) {
+      for (var meal of order.orderedItems) {
+        meal.ready = false;
+      }
+    }
   }
 
-  updateOrders(order){
+  updateOrders(order) {
     order = JSON.parse(order);
     console.log(order);
     const newOrder = new Order(order.tableNumber, order.orderTime, order.orderedItems.map(meal => new Meal(meal.name, meal.amount)));
@@ -29,9 +35,20 @@ export class OrderComponent implements OnInit {
     localStorage.setItem("Orders", JSON.stringify(this.localOrders));
     this.orders.push(newOrder);
   }
-  state: boolean = false;
 
-  toggle(){
-    this.state = !this.state;
+  mealToggle(meal, order) {
+    console.log(order);
+    meal.ready = !meal.ready;
+    order.ready = this.orderReady(order);
+    console.log(order);
   }
+
+  public orderReady(order): boolean {
+    for (var meal of order.orderedItems) {
+      console.log(meal)
+      if (meal.ready === false) return false;
+    }
+    return true;
+  }
+
 }

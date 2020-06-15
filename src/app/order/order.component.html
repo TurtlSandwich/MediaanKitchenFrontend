@@ -1,24 +1,18 @@
-<div class="content">
-  <div class="title"><h4>ORDERS</h4></div>
-  <div class="mediaan-container">
-    <div
-      *ngFor="let order of localOrders"
-      class="order"
-      id="{{ order.tableNumber }}"
-    >
-      <div class="order-info">
-        <h5 class="tableNr">Table {{ order.tableNumber }}</h5>
-        <h5 class="time">{{ order.orderTime }}</h5>
-        <span class="status-red"></span>
-      </div>
-      <ul class="meals">
-        <li
-          (click)="toggle()"
-          [ngClass]="state ? 'meal-done' : ''"
-          *ngFor="let meal of order.orderedItems"
-          class="meal"
-        >
-          {{ meal.name }} <span class="amount">{{ meal.amount }}X</span>
+<div class="text-3xl ml-4 mt-2">Orders</div>
+<div class="flex inline-flex row">
+  <div class="w-64 ml-4 mb-2" *ngFor="let order of localOrders">
+    <!-- Table & order info -->
+    <div class="flex border-solid border-2 border-black text-white bg-black text-xl">
+      <div class="w-2/5 text-center">Table {{order.tableNumber}}</div>
+      <div class="w-2/5 text-center">{{order.orderTime}}</div>
+      <span [ngClass]="order.ready ? 'order-ready' : 'order-new'" class="w-1/5"></span>
+    </div>
+    <!-- Order meals -->
+    <div class="border-solid border-2 border-black text-lg bg-grey">
+      <ul class="font-semibold">
+        <li class="pl-2 cursor-pointer hover:text-white" *ngFor="let meal of order.orderedItems" (click)="mealToggle(meal, order)" [ngClass]="meal.ready ? 'line-through' : 'no-underline'" >
+          {{meal.name}}
+          <span class="float-right pr-2">{{meal.amount}}X</span>
         </li>
       </ul>
     </div>
