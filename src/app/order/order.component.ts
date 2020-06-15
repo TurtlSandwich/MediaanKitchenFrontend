@@ -43,7 +43,7 @@ export class OrderComponent implements OnInit {
     console.log(order);
   }
 
-  public orderReady(order): boolean {
+  orderReady(order): boolean {
     for (var meal of order.orderedItems) {
       console.log(meal)
       if (meal.ready === false) return false;
