@@ -8,7 +8,6 @@ import { MealComponent } from './meal/meal.component';
 import { OrderComponent } from './order/order.component';
 import { OrderService } from './services/order.service';
 import { HeaderComponent } from './header/header.component';
-import { MenuComponent } from './menu/menu.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +15,6 @@ import { MenuComponent } from './menu/menu.component';
     MealComponent,
     OrderComponent,
     HeaderComponent,
-    MenuComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, HttpClientModule],
   providers: [OrderService], 

@@ -2,20 +2,20 @@
   <div class="title"><h4>ORDERS</h4></div>
   <div class="mediaan-container">
     <div
-      *ngFor="let order of orders"
+      *ngFor="let order of localOrders"
       class="order"
       id="{{ order.tableNumber }}"
     >
       <div class="order-info">
         <h5 class="tableNr">Table {{ order.tableNumber }}</h5>
-        <h5 class="time">00:13:52</h5>
+        <h5 class="time">{{ order.orderTime }}</h5>
         <span class="status-red"></span>
       </div>
       <ul class="meals">
         <li
           (click)="toggle()"
           [ngClass]="state ? 'meal-done' : ''"
-          *ngFor="let meal of order.meals"
+          *ngFor="let meal of order.orderedItems"
           class="meal"
         >
           {{ meal.name }} <span class="amount">{{ meal.amount }}X</span>
