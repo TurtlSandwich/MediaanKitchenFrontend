@@ -8,21 +8,11 @@ import { Subject } from 'rxjs';
 })
 export class OrderService {
 
-  getOrdersUrl = "";
-  deleteOrderUrl = "";
 
   private somethingSource = new Subject<any>();
   somethingMessage$ = this.somethingSource.asObservable();
 
   constructor(private http: HttpClient) {}
-
-  getOrders() {
-    return this.http.get<Order[]>(this.getOrdersUrl);
-  }
-
-  // deleteOrder(order: Order) {
-  //   return this.http.delete(this.deleteOrderUrl + "/" + order.id);
-  // }
 
   something(order){
     this.somethingSource.next(order);
