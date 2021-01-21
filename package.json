@@ -30,7 +30,7 @@
     "postcss-import": "^12.0.1",
     "postcss-scss": "^2.1.1",
     "rxjs": "^6.5.5",
-    "socket.io": "^2.3.0",
+    "socket.io": "^2.4.0",
     "sockjs-client": "^1.4.0",
     "stockjs": "^1.1.1",
     "stompjs": "^2.3.3",
